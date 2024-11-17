@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Навигационная панель -->
+  <header class="navbar">
+    <h1>Портфолио Астаны</h1>
+    <nav>
+      <a href="/home">Главная</a>
+      <a href="/logout">Выйти</a>
+    </nav>
+  </header>
+
+  <!-- Карусель -->
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
+      <% portfolioItems.forEach(item => { %>
+        <div class="carousel-slide">
+          <img src="<%= item.images[0] %>" alt="Фото Астаны">
+          <h2><%= item.title %></h2>
+          <p><%= item.description %></p>
+
+          <!-- Управление элементами -->
+          <% if (userRole === "admin") { %>
+            <div class="admin-controls">
+              <!-- Форма для обновления -->
+              <form action="/update/<%= item._id %>" method="POST">
+                <input type="text" name="title" value="<%= item.title %>" required>
+                <textarea name="description" required><%= item.description %></textarea>
+                <input type="text" name="images" value="<%= item.images.join(", ") %>" required>
+                <button type="submit">Обновить</button>
+              </form>
+
+              <!-- Кнопка удаления -->
+              <form action="/delete/<%= item._id %>" method="POST">
+                <button type="submit" class="button-delete">Удалить</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+    <!-- Кнопки для переключения -->
+    <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
+    <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+  </div>
+
+  <!-- Форма для добавления нового элемента -->
+  <% if (userRole === "admin") { %>
+    <div class="add-form">
+      <h2>Добавить новый элемент</h2>
+      <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="Название" required>
+        <textarea name="description" placeholder="Описание" required></textarea>
+        <input type="text" name="images" placeholder="Ссылки на изображения (через запятую)" required>
+        <button type="submit" class="button-add">Добавить</button>
+      </form>
+    </div>
+  <% } %>
+<%- include("partials/footer") %>
+</body>
+<script src="/carousel.js"></script>
+</html>

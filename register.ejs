@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Навигационная панель -->
+  <header class="navbar">
+    <h1>Регистрация</h1>
+    <nav>
+      <a href="/login">Войти</a>
+    </nav>
+  </header>
+
+  <!-- Форма регистрации -->
+  <div class="container">
+    <form action="/register" method="POST">
+      <label>Email:</label>
+      <input type="email" name="username" required><br>
+
+      <label>Пароль:</label>
+      <input type="password" name="password" required><br>
+
+      <label>Имя:</label>
+      <input type="text" name="firstName" required><br>
+
+      <label>Фамилия:</label>
+      <input type="text" name="lastName" required><br>
+
+      <label>Возраст:</label>
+      <input type="number" name="age" required><br>
+
+      <label>Пол:</label>
+      <select name="gender" required>
+        <option value="Male">Мужской</option>
+        <option value="Female">Женский</option>
+        <option value="Other">Другой</option>
+      </select><br>
+
+      <label>Роль:</label>
+      <select name="role">
+        <option value="editor">Редактор</option>
+        <option value="admin">Администратор</option>
+      </select><br>
+
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+    <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+  </div>
+<%- include("partials/footer") %>
+</body>
+</html>

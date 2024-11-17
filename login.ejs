@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Навигационная панель -->
+  <header class="navbar">
+    <h1>Вход</h1>
+    <nav>
+      <a href="/register">Регистрация</a>
+    </nav>
+  </header>
+
+  <!-- Форма входа -->
+  <div class="container">
+    <form action="/login" method="POST">
+      <label>Email:</label>
+      <input type="email" name="username" required><br>
+
+      <label>Пароль:</label>
+      <input type="password" name="password" required><br>
+
+      <button type="submit">Войти</button>
+    </form>
+    <p>Нет аккаунта? <a href="/register">Регистрация</a></p>
+  </div>
+<%- include("partials/footer") %>
+</body>
+</html>
